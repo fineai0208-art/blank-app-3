@@ -1,0 +1,7 @@
+country,event_type,event_name,disease,metric_cases,metric_deaths,metric_injuries,start_date,end_date,source_url
+Sudan,disease_outbreak,Cholera outbreak,Cholera,124418,3573,,2024-07-01,2026-03-03,https://www.emro.who.int/sdn/sudan-news/sudan-declares-an-end-to-its-cholera-outbreak.html
+Democratic Republic of the Congo,multi_epidemic,Communicable disease emergency burden,Cholera; Mpox; Measles; Ebola; Polio,450000,8700,,2025-01-01,2026-02-01,https://reliefweb.int/report/democratic-republic-congo/democratic-republic-congo-who-health-emergency-appeal-2026
+South Sudan,disease_outbreak,Largest cholera outbreak on record,Cholera,96000,1600,,2024-10-01,2025-11-30,https://www.unocha.org/publications/report/south-sudan/south-sudan-humanitarian-needs-and-response-plan-2026-january-2026
+Gaza Strip,conflict_health_crisis,War and public health emergency,Multiple infectious disease risks,,63000,161000,2023-10-07,2025-09-10,https://cdn.who.int/media/docs/default-source/documents/emergencies/who-phsa-opt-100925.pdf?download=true&sfvrsn=367c45e4_1
+Haiti,disease_outbreak,Petion-Ville cholera flare-up,Cholera,372,17,,2025-09-07,2025-11-09,https://www.paho.org/en/stories/fight-against-cholera-haiti-communities-government-and-health-partners-work-together-save
+Haiti,conflict_health_crisis,Gang violence mortality snapshot,Violence-related mortality,,4864,,2024-10-01,2025-06-30,https://www.ungeneva.org/en/news-media/news/2025/07/108384/unending-horror-story-gangs-and-human-rights-abuses-expand-haiti
