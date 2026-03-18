@@ -147,24 +147,26 @@ with tab_map:
             st.markdown('<div style="background:#16213e;border:1px dashed #2a2a4a;border-radius:10px;padding:32px;text-align:center;color:#5a5a7a;margin-top:8px;">← 지도 마커 또는 위 버튼을 클릭하면<br>상세 정보가 표시됩니다</div>', unsafe_allow_html=True)
 
 # ── TAB 2: 통계 그래프 ────────────────────────────────────────────────────────
+LAYOUT = dict(template="plotly_dark", paper_bgcolor="#0f1117", plot_bgcolor="#1e293b",
+              margin=dict(l=10,r=10,t=10,b=10), height=300,
+              xaxis=dict(gridcolor="#334155"), yaxis=dict(gridcolor="#334155"))
+
 with tab_charts:
     c1,c2 = st.columns(2)
     with c1:
         st.markdown('<div class="section-title">1️⃣ 국가별 사망자 수</div>', unsafe_allow_html=True)
         df_d = country_df[["country","deaths_reported"]].dropna().sort_values("deaths_reported")
         fig1 = px.bar(df_d,x="deaths_reported",y="country",orientation="h",color="deaths_reported",
-            color_continuous_scale="Reds",labels={"deaths_reported":"사망자 수","country":"국가"},**PD)
-        fig1.update_layout(height=300,margin=dict(l=10,r=10,t=10,b=10),coloraxis_showscale=False,
-            xaxis=dict(gridcolor="#334155"),yaxis=dict(gridcolor="#334155"))
+            color_continuous_scale="Reds",labels={"deaths_reported":"사망자 수","country":"국가"})
+        fig1.update_layout(**LAYOUT, coloraxis_showscale=False)
         fig1.update_traces(hovertemplate="%{y}<br>사망자: %{x:,}명<extra></extra>")
         st.plotly_chart(fig1,use_container_width=True)
     with c2:
         st.markdown('<div class="section-title">2️⃣ 국가별 감염·케이스 수</div>', unsafe_allow_html=True)
         df_c = country_df[["country","cases_reported"]].dropna().sort_values("cases_reported")
         fig2 = px.bar(df_c,x="cases_reported",y="country",orientation="h",color="cases_reported",
-            color_continuous_scale="OrRd",labels={"cases_reported":"케이스 수","country":"국가"},**PD)
-        fig2.update_layout(height=300,margin=dict(l=10,r=10,t=10,b=10),coloraxis_showscale=False,
-            xaxis=dict(gridcolor="#334155"),yaxis=dict(gridcolor="#334155"))
+            color_continuous_scale="OrRd",labels={"cases_reported":"케이스 수","country":"국가"})
+        fig2.update_layout(**LAYOUT, coloraxis_showscale=False)
         fig2.update_traces(hovertemplate="%{y}<br>케이스: %{x:,}건<extra></extra>")
         st.plotly_chart(fig2,use_container_width=True)
     c3,c4 = st.columns(2)
@@ -173,18 +175,15 @@ with tab_charts:
         df_s = country_df.dropna(subset=["cases_reported","deaths_reported","risk_score"])
         fig3 = px.scatter(df_s,x="cases_reported",y="deaths_reported",size="risk_score",
             color="region_group",hover_name="country",
-            labels={"cases_reported":"감염·케이스","deaths_reported":"사망자","region_group":"지역"},**PD)
-        fig3.update_layout(height=300,margin=dict(l=10,r=10,t=10,b=10),
-            xaxis=dict(gridcolor="#334155"),yaxis=dict(gridcolor="#334155"),
-            legend=dict(orientation="h",y=1.1))
+            labels={"cases_reported":"감염·케이스","deaths_reported":"사망자","region_group":"지역"})
+        fig3.update_layout(**LAYOUT, legend=dict(orientation="h",y=1.1))
         st.plotly_chart(fig3,use_container_width=True)
     with c4:
         st.markdown('<div class="section-title">4️⃣ 국가별 치명률 (%)</div>', unsafe_allow_html=True)
         df_f = country_df[["country","fatality_rate_pct"]].dropna().sort_values("fatality_rate_pct")
         fig4 = px.bar(df_f,x="fatality_rate_pct",y="country",orientation="h",color="fatality_rate_pct",
-            color_continuous_scale="YlOrRd",labels={"fatality_rate_pct":"치명률 (%)","country":"국가"},**PD)
-        fig4.update_layout(height=300,margin=dict(l=10,r=10,t=10,b=10),coloraxis_showscale=False,
-            xaxis=dict(gridcolor="#334155"),yaxis=dict(gridcolor="#334155"))
+            color_continuous_scale="YlOrRd",labels={"fatality_rate_pct":"치명률 (%)","country":"국가"})
+        fig4.update_layout(**LAYOUT, coloraxis_showscale=False)
         fig4.update_traces(hovertemplate="%{y}<br>치명률: %{x:.2f}%<extra></extra>")
         st.plotly_chart(fig4,use_container_width=True)
 
@@ -232,9 +231,9 @@ with tab_timeline:
     fig6 = px.timeline(events_df,x_start="start_date",x_end="end_date",y="country",
         color="event_label",color_discrete_map={v:COLOR_MAP[k] for k,v in LABEL_MAP.items()},
         hover_name="event_name",hover_data={"metric_cases":True,"metric_deaths":True,"event_label":False},
-        labels={"event_label":"이벤트 유형","country":"국가","metric_cases":"케이스","metric_deaths":"사망자"},**PD)
+        labels={"event_label":"이벤트 유형","country":"국가","metric_cases":"케이스","metric_deaths":"사망자"})
     fig6.update_yaxes(autorange="reversed")
-    fig6.update_layout(height=380,margin=dict(l=10,r=10,t=10,b=10),
+    fig6.update_layout(template="plotly_dark",paper_bgcolor="#0f1117",plot_bgcolor="#1e293b",height=380,margin=dict(l=10,r=10,t=10,b=10),
         xaxis=dict(gridcolor="#334155",title=""),yaxis=dict(gridcolor="#334155"),
         legend=dict(orientation="h",y=1.08))
     st.plotly_chart(fig6,use_container_width=True)
