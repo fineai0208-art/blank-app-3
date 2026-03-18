@@ -338,7 +338,7 @@ with tab_charts:
     fig5 = px.bar(df_hm, x="name_kr", y="인원", color="구분", barmode="group",
         color_discrete_map={"지원 필요 인구":RED,"실향민":"#457b9d"},
         labels={"name_kr":"국가","인원":"인원 수 (명)"})
-    fig5.update_layout(**LO, height=300, legend=dict(orientation="h", y=1.08))
+    fig5.update_layout(**LO, legend=dict(orientation="h", y=1.08))
     fig5.update_traces(hovertemplate="%{x}<br>%{y:,}명<extra></extra>")
     st.plotly_chart(fig5, use_container_width=True)
 
